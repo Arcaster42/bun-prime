@@ -4,8 +4,9 @@
     "bun-types": "^0.5.8"
   },
   "name": "bun-prime",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "keywords": ["prime", "bun", "express", "http", "server", "rest", "api", "framework"],
+  "license": "MIT",
   "module": "prime.ts",
   "main": "prime.ts",
   "type": "module",
