@@ -4,7 +4,8 @@
     "bun-types": "^0.5.8"
   },
   "name": "bun-prime",
-  "version": "0.1.5",
+  "version": "0.1.6",
+  "keywords": ["prime", "bun", "express", "http", "server", "rest", "api", "framework"],
   "module": "prime.ts",
   "main": "prime.ts",
   "type": "module",
