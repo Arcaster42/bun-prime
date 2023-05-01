@@ -37,6 +37,12 @@ export class PrimeServer {
    *   return new Response('OK', { status: 200 })
    * })
    * ```
+   * **Example**
+   * ```ts
+   * server.get('/blog/:id', (req, params: { id: number }) => {
+   *  return new Response(`Blog ${params.id}`)
+   * })
+   * ```
    * 
    * @param path - URL path
    * @param handler - Handler for the route
