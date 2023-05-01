@@ -18,7 +18,7 @@ You can install Prime with the Bun command: `bun add bun-prime`
 Import the `PrimeServer` class and instantiate it with the port as an argument.
 
 ```
-import { PrimeServer } from './prime'
+import { PrimeServer } from 'bun-prime'
 const server = new PrimeServer(3000)
 ```
 
