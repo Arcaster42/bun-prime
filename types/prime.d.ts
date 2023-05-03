@@ -17,12 +17,13 @@ export class PrimeServer {
 
 export interface PrimeRoute {
   path: string
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  handler: (req: Request, params?: Record<string, any>) => Response | Promise<Response>
+  method: Method
+  handler?: (req: Request, params?: Record<string, any>) => Response | Promise<Response>
+  middleware?: (req: Request) => Response | Promise<Response> | void
   paramIndexes?: number[]
 }
 
-export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
+export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | '*'
 
 export interface WSHandlers {
   open: (ws: ServerWebSocket<unknown>) => void
@@ -33,4 +34,5 @@ export interface WSHandlers {
 
 export interface PrimeServeOptions {
   logStart?: boolean
+  dev?: boolean
 }
