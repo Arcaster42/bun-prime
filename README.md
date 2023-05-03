@@ -58,6 +58,24 @@ server.get('/blog/:id/content', (req, params: { id: number }) => {
 
 **NOTE**: Wildcards (`*`) are not yet supported.
 
+### Middleware
+
+Middleware can be applied using the `use` method. These will run in order they
+are added to the route list, so the position of the middleware the code is
+important.
+
+When you add middleware, you can access the request, and you can either return a
+response early to stop the request or leave the function void to continue to the
+next middleware or route.
+
+```
+server.use((req) => {
+  if (!isAuthorized(req)) {
+    return new Response('NOT OK', { status: 500 })
+  }
+})
+```
+
 ### Websocket
 
 Web sockets are supported with a simple API. You only need to prepare the
