@@ -101,8 +101,34 @@ export class PrimeServer {
   }
 
   /**
+   * This applies middleware to be called for any route below.
+   * Return a response to end the request.
+   * Void functions will continue to the next middleware or route.
+   * 
+   * **Example**
+   * ```ts
+   * server.use((req) => {
+   *   if (!isAuthorized(req)) {
+   *     return new Response('Bad Auth', { status: 401 })
+   *   }
+   * })
+   * ```
+   */
+  public use(middleware: (req) => Response | Promise<Response> | void) {
+    this.routes.push({ path: '*', method: '*', middleware })
+  }
+
+  /**
    * This starts the server.
    * It will handle all requests and websocket events.
+   * 
+   * **Example**
+   * ```ts
+   * server.serve({
+   *   logStart: true, // logs "Server started on port ${port}"
+   *   dev: true // enabled Bun dev mode for debugging
+   * })
+   * ```
    */
   public serve(options?: PrimeServeOptions) {
     const primeRoutes = this.routes
@@ -129,4 +155,4 @@ export class PrimeServer {
   }
 }
 
-exports.PrimeServer = PrimeServer
+// exports.PrimeServer = PrimeServer
