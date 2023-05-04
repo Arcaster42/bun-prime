@@ -11,14 +11,15 @@ export const handleRouting = (req: Request, primeRoutes: PrimeRoute[]) => {
         else continue
       }
     }
-    if (!route.path.includes(':')) {
+    if (!route.path.includes(':') && !route.path.includes('*')) {
       if (route.path === url.pathname && route.method === req.method) {
         return route.handler(req)
       }
     } else {
       const pathArray = route.path.split('/')
       const urlArray = url.pathname.split('/')
-      if (pathArray.length === urlArray.length && route.method === req.method) {
+      console.log(pathArray, urlArray)
+      if (pathArray.length === urlArray.length && route.method === req.method && compareRoute(pathArray, urlArray)) {
         const params = {}
         for (let i = 0; i < pathArray.length; i++) {
           if (pathArray[i].includes(':')) {
@@ -30,4 +31,14 @@ export const handleRouting = (req: Request, primeRoutes: PrimeRoute[]) => {
     }
   }
   return new Response('Not found', { status: 404 })
+}
+
+const compareRoute = (pathArray: string[], urlArray: string[]) => {
+  for (const [i, path] of Object.entries(pathArray)) {
+    console.log('comp', path, urlArray[i])
+    if (!pathArray[i].includes(':') && !pathArray[i].includes('*')) {
+      if (pathArray[i] !== urlArray[i]) return false
+    }
+  }
+  return true
 }
