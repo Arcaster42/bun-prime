@@ -56,7 +56,14 @@ server.get('/blog/:id/content', (req, params: { id: number }) => {
 })
 ```
 
-**NOTE**: Wildcards (`*`) are not yet supported.
+You can use wildcards in routes. These support parameters as well. These routes
+should come after all non-wildcard routes to avoid catching requests too early.
+
+```
+server.get('/blog/:id/*', (req, params: { id: number }) => {
+  return new Response(`Blog ${params.id} wildcard`)
+})
+```
 
 ### Middleware
 
